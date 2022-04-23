@@ -58,10 +58,10 @@ class RedLineFollowing:
     def redMask(self, image):
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-        range_low1 = np.array([0, 70, 50])
+        range_low1 = np.array([0, 100, 20])
         range_high1 = np.array([10, 255, 255])
-        range_low2 = np.array([170, 70, 50])
-        range_high2 = np.array([180, 255, 255])
+        range_low2 = np.array([160, 100, 20])
+        range_high2 = np.array([179, 255, 255])
 
         mask1 = cv2.inRange(hsv_image, range_low1, range_high1)
         mask2 = cv2.inRange(hsv_image, range_low2, range_high2)
@@ -83,7 +83,7 @@ class RedLineFollowing:
 # video = cv2.VideoCapture("Resources/videos/fish_pen_transect (1080p).mp4")
 # frame = cv2.imread("Resources/images/redLine_canvas")
 # frame = cv2.imread("Resources/images/onlinePaint.png")
-frame = cv2.imread("Resources/images/Screenshot from 2022-04-11 19-27-00.png")
+frame = cv2.imread("AI-MATE-ROV-2022/2.1_flay transectline/Resources/images/mission.png")
 # frame = cv2.imread("Resources/images/circle.jpg")
 # _, frame = video.read()
 
