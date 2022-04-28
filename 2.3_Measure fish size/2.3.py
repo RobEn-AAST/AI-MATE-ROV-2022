@@ -34,9 +34,9 @@ def calculate_density():
     global N, a, b, Length, M
     cv2.destroyAllWindows()
     ruler_length_in_pixels = math.sqrt(pow(abs(RULER_POINT2[0] - RULER_POINT1[0]), 2) + pow(abs(RULER_POINT2[1] - RULER_POINT1[1]), 2)) # 1 meter in real life
-    robot_length_in_pixels = math.sqrt(pow(abs(ROBOT_POINT2[0] - ROBOT_POINT1[0]), 2) + pow(abs(ROBOT_POINT2[1] - ROBOT_POINT1[1]), 2))
+    fish_length_in_pixels = math.sqrt(pow(abs(ROBOT_POINT2[0] - ROBOT_POINT1[0]), 2) + pow(abs(ROBOT_POINT2[1] - ROBOT_POINT1[1]), 2))
 
-    length = REFERENCE_LENGTH_IN_METERS * robot_length_in_pixels / float(ruler_length_in_pixels)
+    length = REFERENCE_LENGTH_IN_METERS * fish_length_in_pixels / float(ruler_length_in_pixels)
     # Length = length
     print(">>>>" + str(length))
     
