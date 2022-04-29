@@ -52,14 +52,14 @@ def click_event():
     global CLICKS_COUNTER, RULER_POINT1 , RULER_POINT2 , ROBOT_POINT1 ,ROBOT_POINT2 , ROBOT_POINT3, ROBOT_POINT4
     if CLICKS_COUNTER == 0:
         r = cv2.selectROI(img)
-        RULER_POINT1 = abs(int(r[1])-int(r[1]+r[3]))
+        RULER_POINT1 = int(r[3])
         print(RULER_POINT1)
     elif CLICKS_COUNTER == 1:
         r = cv2.selectROI(img)
-        ROBOT_POINT2 = abs(int(r[0])-int(r[0]+r[2]))
+        ROBOT_POINT2 = int(r[2])
     elif CLICKS_COUNTER == 2:
         r = cv2.selectROI(img)
-        ROBOT_POINT3 = abs(int(r[0])-int(r[0]+r[2]))
+        ROBOT_POINT3 = int(r[2])
         ROBOT_POINT4 = ROBOT_POINT3 + ROBOT_POINT2
         calculate_density()
 
