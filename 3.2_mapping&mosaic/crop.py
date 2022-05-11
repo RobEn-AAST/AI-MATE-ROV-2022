@@ -1,6 +1,4 @@
 import cv2
-import os
-import matplotlib.pyplot as plt
 
 def crop_img(img,dim ,scale):
     for j in range(8):
@@ -13,21 +11,23 @@ def crop_img(img,dim ,scale):
         return cropped_img;
 
 def cropped_images():
-    # read images
-    list_of_images=[]
-    #karim should enter theee path himself the path is not final
-    DirPath='K:/AI-MATE-ROV-2022/3.2_mapping&mosaic/data'
-    Images=os.listdir(DirPath)
+    cropped_img1 = crop_img(cv2.imread('./data/frame1.jpg'), (600,600),(0.8,1))   
+    cropped_img2 = crop_img(cv2.imread('./data/frame2.jpg'), (600,600),(0.8,1))
+    cropped_img3 = crop_img(cv2.imread('./data/frame3.jpg'), (600,600),(0.8,1))
+    cropped_img4 = crop_img(cv2.imread('./data/frame4.jpg'), (600,600),(0.8,1))
+    cropped_img5 = crop_img(cv2.imread('./data/frame5.jpg'), (600,600),(0.8,1))
+    cropped_img6 = crop_img(cv2.imread('./data/frame6.jpg'), (600,600),(0.8,1))
+    cropped_img7 = crop_img(cv2.imread('./data/frame7.jpg'), (600,600),(0.8,1))
+    cropped_img8 = crop_img(cv2.imread('./data/frame8.jpg'), (600,600),(0.8,1))
 
-    for img in Images:
-        imgpath=os.path.join(DirPath,img)
-        image=cv2.imread(imgpath)
-        list_of_images.append(image)
-    
-    for i in range(8):
-        cropped_img = crop_img(list_of_images[i], (600,600),(0.8,1))
-        name = './data/frame' + str(i+1) + '.jpg'
-        cv2.imwrite(name, cropped_img)
+    cv2.imwrite('./data/frame1.jpg' , cropped_img1)
+    cv2.imwrite('./data/frame2.jpg' , cropped_img2)
+    cv2.imwrite('./data/frame3.jpg' , cropped_img3)
+    cv2.imwrite('./data/frame4.jpg' , cropped_img4)
+    cv2.imwrite('./data/frame5.jpg' , cropped_img5)
+    cv2.imwrite('./data/frame6.jpg' , cropped_img6)
+    cv2.imwrite('./data/frame7.jpg' , cropped_img7)
+    cv2.imwrite('./data/frame8.jpg' , cropped_img8)
 
 if __name__=='__main__':
     cropped_images()

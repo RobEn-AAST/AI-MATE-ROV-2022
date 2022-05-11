@@ -16,8 +16,8 @@ def save():
 
     try:
         # creating a folder named data
-        if not os.path.exists('K:/AI-MATE-ROV-2022/3.2_mapping&mosaic/data'):
-            os.makedirs('K:/AI-MATE-ROV-2022/3.2_mapping&mosaic/data')
+        if not os.path.exists('./data'):
+            os.makedirs('./data')
 
     # if not created then raise error
     except OSError:
