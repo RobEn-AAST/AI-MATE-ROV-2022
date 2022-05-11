@@ -2,7 +2,7 @@ import cv2
 
 class DrawLineWidget(object):
     def __init__(self):
-        self.original_image = cv2.imread(r'C:\Users\lenovo\OneDrive\Desktop\Roben\WhatsApp Image 2022-05-09 at 6.54.02 PM.jpeg')
+        self.original_image = cv2.imread('map.png')
         self.clone = self.original_image.copy()
 
         cv2.namedWindow('image')
@@ -33,12 +33,12 @@ class DrawLineWidget(object):
         return self.clone
 
 if __name__ == '__main__':
-    draw_line_widget = DrawLineWidget()
+    draw_line_widgetk = DrawLineWidget()
     while True:
-        cv2.imshow('image', draw_line_widget.show_image())
-        key = cv2.waitKey(1)
+        cv2.imshow('image', draw_line_widgetk.show_image())
+        key = cv2.waitKey(10)
 
         # Close program with keyboard 'x'
-        if key == ord('x'):
+        if key%256 == 27:
             cv2.destroyAllWindows()
             exit(1)

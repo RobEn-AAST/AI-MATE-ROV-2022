@@ -1,6 +1,8 @@
 import cv2
 from screeninfo import get_monitors
 import os
+
+
 def mosaic():
     window_name= "fullscreen"
 
@@ -15,7 +17,7 @@ def mosaic():
 
     # read images
     list_of_images=[]
-    #path is not final karim needs to enter the path himself
+    #karim should enter theee path himself the path is not final
     DirPath='K:/AI-MATE-ROV-2022/3.2_mapping&mosaic/data'
     Images=os.listdir(DirPath)
     for img in Images:
@@ -26,7 +28,7 @@ def mosaic():
     img_1=cv2.resize(list_of_images[0],(width//4,height//2))
     img_2=cv2.resize(list_of_images[1],(width//4,height//2))
     img_3=cv2.resize(list_of_images[2],(width//4,height//2))
-    img_4=cv2.resize(list_of_images[3],(width//4,height//2))
+    img_4=cv2.resize(list_of_images[4],(width//4,height//2))
     img_5=cv2.resize(list_of_images[4],(width//4,height//2))
     img_6=cv2.resize(list_of_images[5],(width//4,height//2))
     img_7=cv2.resize(list_of_images[6],(width//4,height//2))
@@ -42,5 +44,3 @@ def mosaic():
 # gathering images
 def final_shape(list_2d):
     return cv2.vconcat([cv2.hconcat(list_1) for list_1 in list_2d])
-
-mosaic()
