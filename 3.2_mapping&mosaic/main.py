@@ -1,7 +1,7 @@
 from mapping import *
-from mosaic import *
-from PressSave import *
-from crop import *
+from mosaic import mosaic
+from PressSave import save
+from crop import cropped_images
 
 def mapping():
     ddraw_line_widget = DrawLineWidget()
