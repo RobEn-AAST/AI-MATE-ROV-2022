@@ -37,6 +37,7 @@
   - [ ] Fix _holding_ on S button
   - [ ] Display the 8 images in **one** window
   - [ ] Make screen size Larger (without rescaling)
+  - [ ] Display the Mosaic in correct order
   - [ ] Fill the Requirments file
   
   
