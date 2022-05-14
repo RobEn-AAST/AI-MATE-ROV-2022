@@ -27,7 +27,7 @@ def mosaic():
     img_8=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
 
     #final shape review
-    img_review= final_shape([[img_1,img_2,img_3,img_4],[img_5,img_6,img_7,img_8]])
+    img_review= final_shape([[img_1,img_3,img_5,img_7],[img_2,img_4,img_6,img_8]])
 
     cv2.imshow(window_name,img_review)
     cv2.waitKey(0)
