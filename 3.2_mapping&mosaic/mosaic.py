@@ -1,7 +1,5 @@
 import cv2
 from screeninfo import get_monitors
-import os
-
 
 def mosaic():
     window_name= "fullscreen"
@@ -17,14 +15,14 @@ def mosaic():
 
     # read images
 
-    img_1=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_2=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_3=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_4=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_5=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_6=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_7=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
-    img_8=cv2.resize((cv2.imread('./data/frame8.jpg')),(width//4,height//2))
+    img_1=cv2.resize((cv2.imread('.\\data\\split1.jpg')),(width//4,height//2))
+    img_2=cv2.resize((cv2.imread('.\\data\\split2.jpg')),(width//4,height//2))
+    img_3=cv2.resize((cv2.imread('.\\data\\split3.jpg')),(width//4,height//2))
+    img_4=cv2.resize((cv2.imread('.\\data\\split4.jpg')),(width//4,height//2))
+    img_5=cv2.resize((cv2.imread('.\\data\\split5.jpg')),(width//4,height//2))
+    img_6=cv2.resize((cv2.imread('.\\data\\split6.jpg')),(width//4,height//2))
+    img_7=cv2.resize((cv2.imread('.\\data\\split7.jpg')),(width//4,height//2))
+    img_8=cv2.resize((cv2.imread('.\\data\\split8.jpg')),(width//4,height//2))
 
     #final shape review
     img_review= final_shape([[img_1,img_3,img_5,img_7],[img_2,img_4,img_6,img_8]])

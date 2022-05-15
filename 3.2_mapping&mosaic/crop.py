@@ -9,26 +9,19 @@ def crop_img(img,dim ,scale):
         y1, y2 = ym - hight / 2, ym + hight / 2
         cropped_img = img[int(y1):int(y2), int(x1):int(x2)]
         return cropped_img;
-
+        
 def cropped_images():
-    cropped_img1 = crop_img(cv2.imread('./data/frame1.jpg'), (600,600),(0.8,1))   
-    cropped_img2 = crop_img(cv2.imread('./data/frame2.jpg'), (600,600),(0.8,1))
-    cropped_img3 = crop_img(cv2.imread('./data/frame3.jpg'), (600,600),(0.8,1))
-    cropped_img4 = crop_img(cv2.imread('./data/frame4.jpg'), (600,600),(0.8,1))
-    cropped_img5 = crop_img(cv2.imread('./data/frame5.jpg'), (600,600),(0.8,1))
-    cropped_img6 = crop_img(cv2.imread('./data/frame6.jpg'), (600,600),(0.8,1))
-    cropped_img7 = crop_img(cv2.imread('./data/frame7.jpg'), (600,600),(0.8,1))
-    cropped_img8 = crop_img(cv2.imread('./data/frame8.jpg'), (600,600),(0.8,1))
-
-    cv2.imwrite('./data/frame1.jpg' , cropped_img1)
-    cv2.imwrite('./data/frame2.jpg' , cropped_img2)
-    cv2.imwrite('./data/frame3.jpg' , cropped_img3)
-    cv2.imwrite('./data/frame4.jpg' , cropped_img4)
-    cv2.imwrite('./data/frame5.jpg' , cropped_img5)
-    cv2.imwrite('./data/frame6.jpg' , cropped_img6)
-    cv2.imwrite('./data/frame7.jpg' , cropped_img7)
-    cv2.imwrite('./data/frame8.jpg' , cropped_img8)
+    cropped_img1 = crop_img(cv2.imread('.\\data\\frame1.jpg'), (600,600),(0.8,1))   
+    cropped_img2 = crop_img(cv2.imread('.\\data\\frame2.jpg'), (600,600),(0.8,1))
+    cropped_img3 = crop_img(cv2.imread('.\\data\\frame3.jpg'), (600,600),(0.8,1))
+    cropped_img4 = crop_img(cv2.imread('.\\data\\frame4.jpg'), (600,600),(0.8,1))
+ 
+    cv2.imwrite('.\\data\\frame1.jpg' , cropped_img1)
+    cv2.imwrite('.\\data\\frame2.jpg' , cropped_img2)
+    cv2.imwrite('.\\data\\frame3.jpg' , cropped_img3)
+    cv2.imwrite('.\\data\\frame4.jpg' , cropped_img4)
 
 if __name__=='__main__':
     cropped_images()
+    
     

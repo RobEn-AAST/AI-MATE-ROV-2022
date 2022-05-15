@@ -33,11 +33,12 @@
   - [x] Check every file is working
   - [x] Make main.py file
   - [x] main.py is ready to run
+  - [x] Display the Mosaic in correct order
+  - [x] Fill the Requirments file
+  - [x] Fix _holding_ on S button
   
-  - [ ] Fix _holding_ on S button
   - [ ] Display the 8 images in **one** window
   - [ ] Make screen size Larger (without rescaling)
-  - [ ] Display the Mosaic in correct order
-  - [ ] Fill the Requirments file
+
   
   

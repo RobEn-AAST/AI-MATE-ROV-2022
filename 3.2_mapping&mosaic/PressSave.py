@@ -36,9 +36,35 @@ def save():
             # ESC pressed
             print("Escape hit, closing...")
             break
+        
+        elif k%256==32:
+            #press space to delete
+            while 1:
+                try:
+                    no_of_images_to_be_removed=(input("the no of previos photos to remove"))
+                    if(no_of_images_to_be_removed=='q'or no_of_images_to_be_removed=='Q'):
+                        break
+                    no_of_images_to_be_removed=int(no_of_images_to_be_removed)
+                    if(no_of_images_to_be_removed<=(currentframe-1)):
+                        for images in range(currentframe*1,currentframe-(no_of_images_to_be_removed+1),-1):
+                            try:
+                                if(os.path.exists('.\\data\\frame' + str(images) + '.jpg')):
+                                    os.remove('.\\data\\frame' + str(images) + '.jpg')
+                                    currentframe-=1
+                            except Exception:
+                                print('doesnt exist')        
+                                break
+                        break
+                    else:
+                        print('out of range')
+                        continue     
+                except Exception:
+                    print("invalid input")
+                    continue         
+                    
         elif k%256 == 115 or k%256 == 83: 
             # press s or S
-            name = './data/frame' + str(currentframe) + '.jpg'
+            name = '.\\data\\frame' + str(currentframe) + '.jpg'
             print ('Creating...' + name)
             cv2.imwrite(name, frame)
             currentframe += 1
