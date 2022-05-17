@@ -103,6 +103,7 @@ class RedLineFollowing:
 # frame = cv2.imread("Resources/images/onlinePaint.png")
 frame = cv2.imread("/Users/nourhanelyamany/Desktop/Uni/RobEn/Mate2022/AI-MATE-ROV-2022/2.1_flay transectline/Resources/images/test.jpg")
 frame = cv2.resize(frame,[800,800])
+frame =  frame.blur(frame, (6,6))
 # frame = cv2.imread("Resources/images/circle.jpg")
 # _, frame = video.read()
 
