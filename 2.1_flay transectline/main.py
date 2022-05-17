@@ -1,5 +1,15 @@
 import cv2
 import numpy as np
+from rovlib.cameras import RovCam
+from rovlib.control import RovMavlink, JoyStickControl
+
+rov = RovMavlink(connection_type = 'udpin', connection_ip = '0.0.0.0', connection_port = '14550', silent_mode = True)
+# Binds to the port in the given address
+rov.establish_connection()
+
+rov.arm_vehicle() # you only need to arm the vehicle once, there is no need to arm it every time you want to stablize it
+
+rov.set_vehicle_mode(rov.Mode.STABILIZE)
 
 
 class RedLineFollowing:
@@ -33,18 +43,26 @@ class RedLineFollowing:
 
         if cv2.countNonZero(list_up) > 0 and self.lastDirection[1] != "up":
             print("Move up")
+            joyStick = JoyStickControl(z_throttle=0.8)
+            rov.send_control(joyStick)
             self.lastDirection[1] = "down"
             y -= 20
         if cv2.countNonZero(list_down) > 0 and self.lastDirection[1] != "down":
             print("Move down")
+            joyStick = JoyStickControl(z_throttle=-0.8)
+            rov.send_control(joyStick)
             self.lastDirection[1] = "up"
             y += 20
         if cv2.countNonZero(list_right) > 0 and self.lastDirection[0] != "right":
             print("Move right")
+            joyStick = JoyStickControl(y_throttle=0.8)
+            rov.send_control(joyStick)
             self.lastDirection[0] = "left"
             x += 20
         if cv2.countNonZero(list_left) > 0 and self.lastDirection[0] != "left":
             print("Move left")
+            joyStick = JoyStickControl(y_throttle=-0.8)
+            rov.send_control(joyStick)
             self.lastDirection[0] = "right"
             x -= 20
 
@@ -58,10 +76,10 @@ class RedLineFollowing:
     def redMask(self, image):
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-        range_low1 = np.array([0, 100, 20])
-        range_high1 = np.array([0, 255, 255])
-        range_low2 = np.array([160, 100, 20])
-        range_high2 = np.array([190, 255, 255])
+        range_low1 = np.array([0, 50, 50])
+        range_high1 = np.array([10, 255, 255])
+        range_low2 = np.array([170, 50, 50])
+        range_high2 = np.array([180, 255, 255])
 
         mask1 = cv2.inRange(hsv_image, range_low1, range_high1)
         mask2 = cv2.inRange(hsv_image, range_low2, range_high2)
@@ -83,7 +101,8 @@ class RedLineFollowing:
 # video = cv2.VideoCapture("Resources/videos/fish_pen_transect (1080p).mp4")
 # frame = cv2.imread("Resources/images/redLine_canvas")
 # frame = cv2.imread("Resources/images/onlinePaint.png")
-frame = cv2.imread("Resources/images/mission.png")
+frame = cv2.imread("/Users/nourhanelyamany/Desktop/Uni/RobEn/Mate2022/AI-MATE-ROV-2022/2.1_flay transectline/Resources/images/test.jpg")
+frame = cv2.resize(frame,[800,800])
 # frame = cv2.imread("Resources/images/circle.jpg")
 # _, frame = video.read()
 
@@ -92,6 +111,7 @@ redLineFollowing = RedLineFollowing()
 bounding = redLineFollowing.cameraViewRectangle(frame)
 
 while 1:
+    
     mask = redLineFollowing.redMask(frame)
 
     # drawRedLineContoures(frame, mask)
