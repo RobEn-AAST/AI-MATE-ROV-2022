@@ -101,9 +101,7 @@ class RedLineFollowing:
 # video = cv2.VideoCapture("Resources/videos/fish_pen_transect (1080p).mp4")
 # frame = cv2.imread("Resources/images/redLine_canvas")
 # frame = cv2.imread("Resources/images/onlinePaint.png")
-frame = cv2.imread("/Users/nourhanelyamany/Desktop/Uni/RobEn/Mate2022/AI-MATE-ROV-2022/2.1_flay transectline/Resources/images/test.jpg")
-frame = cv2.resize(frame,[800,800])
-frame =  frame.blur(frame, (6,6))
+#frame = cv2.resize(frame,[800,800])
 # frame = cv2.imread("Resources/images/circle.jpg")
 # _, frame = video.read()
 
@@ -111,14 +109,22 @@ redLineFollowing = RedLineFollowing()
 
 bounding = redLineFollowing.cameraViewRectangle(frame)
 
+cam = RovCam(RovCam.FRONT)
 while 1:
     
+
+    frame = cam.read()
+
+    cv2.imshow("ROV", frame)
+
+  
+    frame =  frame.blur(frame, (6,6))
     mask = redLineFollowing.redMask(frame)
 
     # drawRedLineContoures(frame, mask)
     framecpy = frame.copy()
     cv2.rectangle(framecpy, (bounding[0], bounding[1]), (bounding[0] + bounding[2], bounding[1] + bounding[3]),
-                  (255, 0, 0), 3)
+                    (255, 0, 0), 3)
     redLineFollowing.drawRedLineContoures(framecpy, mask)
     cv2.imshow('frame', framecpy)
     cv2.imshow('mask', mask)
