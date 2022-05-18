@@ -7,31 +7,15 @@ import os
 
 cam = "0" # camera 0
 
-def tst_exec(script_name):
+def script_exec(script_name):
     os.system("python ./"+script_name) 
 
 
-def mapping_exec():
-    print("im here ")
-    
-    camera_read = threading.Thread(target=tst_exec, args=("mapping_mosaic/mapping.py",))
+def start_script_thread(script_name):
+    camera_read = threading.Thread(target=script_exec, args=(script_name,))
     camera_read.daemon = False
     # camera_read.daemon = True
     camera_read.start()
-    print("im out ")
-
-
-def Healthy_exec():
-    os.system("python ./mapping_mosaic/mapping.py") 
-
-def MFish_exec():
-    os.system("python ./mapping_mosaic/mapping.py") 
-
-def Fltransectline_exec():
-    os.system("python ./flyTransect/main.py") 
-
-def PIDS_exec():
-    os.system("python ./mapping_mosaic/mapping.py") 
 
 
 window = tk.Tk()
@@ -69,7 +53,7 @@ button4.place(x=400, y= 300)
 button5 = tk.Button(window, text = "Nothing " , fg = "blue", width = 18, height = 8, command = lambda : print('x'))
 button5.place(x=200, y= 480)
 
-button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :mapping_exec())
+button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mapping_mosaic/mapping.py"))
 button6.place(x=400, y= 480)
 
 
