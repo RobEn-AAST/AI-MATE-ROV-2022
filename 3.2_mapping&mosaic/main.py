@@ -1,5 +1,4 @@
 import imp
-from mapping import DrawLineWidget
 from mosaic import mosaic
 from PressSave import save
 from crop import crop_imgs
@@ -8,17 +7,6 @@ from time import sleep
 from random8 import Display8imgs
 import cv2
 
-def mapping():
-    draw_line_widget = DrawLineWidget()
-    while True:
-        cv2.imshow('image', draw_line_widget.show_image())
-        key = cv2.waitKey(0)
-
-        # Close program with keyboard 'x'
-        if key%256 == 27:
-            cv2.destroyAllWindows()
-            break
-        
 def show_images():
     imgs_list = save()
     imgs_cropped_list = crop_imgs(imgs_list)
@@ -31,6 +19,5 @@ def show_images():
 if __name__=='__main__':
     img8_list = show_images()
     sleep(2)
-    mapping()
     Display8imgs(img8_list)
     mosaic(img8_list)
