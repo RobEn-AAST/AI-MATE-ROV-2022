@@ -1,9 +1,11 @@
+import imp
 from mapping import DrawLineWidget
 from mosaic import mosaic
 from PressSave import save
-from crop import cropped_images
+from crop import crop_imgs
 from cut2Parts import split_img
 from time import sleep
+from random8 import Display8imgs
 import cv2
 
 def mapping():
@@ -18,24 +20,17 @@ def mapping():
             break
         
 def show_images():
-    save()
-    cropped_images()
-    split_img()
-
-    cv2.imshow('image1',cv2.imread('.\\data\\split1.jpg'))
-    cv2.imshow('image2',cv2.imread('.\\data\\split2.jpg'))
-    cv2.imshow('image3',cv2.imread('.\\data\\split3.jpg'))
-    cv2.imshow('image4',cv2.imread('.\\data\\split4.jpg'))
-    cv2.imshow('image5',cv2.imread('.\\data\\split5.jpg'))
-    cv2.imshow('image6',cv2.imread('.\\data\\split6.jpg'))
-    cv2.imshow('image7',cv2.imread('.\\data\\split7.jpg'))
-    cv2.imshow('image8',cv2.imread('.\\data\\split8.jpg'))
-
+    imgs_list = save()
+    imgs_cropped_list = crop_imgs(imgs_list)
+    img8_list = split_img(imgs_cropped_list)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    return img8_list
+
 
 if __name__=='__main__':
-    show_images()
+    img8_list = show_images()
     sleep(2)
     mapping()
-    mosaic()
+    Display8imgs(img8_list)
+    mosaic(img8_list)
