@@ -1,9 +1,6 @@
 import cv2
 import os
 
-
-
-
 def save():
 
     # frame
