@@ -1,2 +1,4 @@
 opencv-python==4.5.5.64
 screeninfo==0.8
+numpy==1.16.6
+rovlib==1.0.3
