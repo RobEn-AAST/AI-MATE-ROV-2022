@@ -12,7 +12,7 @@ def start_movement():
     rov.arm_vehicle() # you only need to arm the vehicle once, there is no need to arm it every time you want to stablize it
    
 
-    rov.set_vehicle_mode(rov.Mode.STABILIZE)
+    rov.set_vehicle_mode(rov.Mode.ALT_HOLD)
     # to disarm vehicle
     my_lovely_fake_joy_stick = JoyStickControl(z_throttle=-0.6)
     
@@ -45,3 +45,6 @@ def start_movement():
             break
     
     rov.disarm_vehicle()
+
+start_conn()
+start_movement()

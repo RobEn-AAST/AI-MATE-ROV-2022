@@ -59,7 +59,7 @@ button6.place(x=400, y= 480)
 button7 = tk.Button(window, text = "Float" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("MeasureInFloatV_H/main.py"))
 button7.place(x=200, y= 660)
 
-button8 = tk.Button(window, text = "Nothing" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
+button8 = tk.Button(window, text = "Mosaic" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/main.py"))
 button8.place(x=400, y= 660)
 
 
