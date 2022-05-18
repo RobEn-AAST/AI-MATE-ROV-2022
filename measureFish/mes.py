@@ -61,7 +61,7 @@ while counter < 3:
     class DrawLine:
         def __init__(self,master):
 
-            self.ref_cm = 1
+            self.ref_cm = 2.3
             self.ref_pix = 0
 
             self.referencing = True
