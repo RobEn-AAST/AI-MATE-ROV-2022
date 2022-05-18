@@ -9,6 +9,7 @@ def cal_square():
    angle=float(b.get())
    t=float(c.get())
    angle=(angle-90)*math.pi/180
+   angle = angle * (-1)
    v=v*3.6
    d=v*t
    Vdist=d*math.cos(angle)
