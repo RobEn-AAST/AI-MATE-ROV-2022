@@ -1,20 +1,34 @@
 import cv2
 import os
+from rovlib.cameras import RovCam
+
+def rescale(frame,scale=0.6):
+    width=int(frame.shape[1]*scale)
+    height=int(frame.shape[0]*scale)
+    dimensions=(width,height)
+    return cv2.resize(frame,dimensions, interpolation=cv2.INTER_AREA)
 
 def save():
-
+    list_of_images=[]
     # frame
     currentframe = 1
-    cam = cv2.VideoCapture(0)
-   
+    cam = RovCam(RovCam.MISC1)
+
+    try:
+        # creating a folder named data
+        if not os.path.exists('./data'):
+            os.makedirs('./data')
+
+    # if not created then raise error
+    except OSError:
+        print ('Error: Creating directory of data')
     # Read the video from specified path
-    imgs = []
+
     while True:
-        ret, frame = cam.read()
-        # frame_resized =rescale(frame)
-        cv2.imshow('video ',frame)
-        if not ret:
-            break
+        frame = cam.read()
+        frame_resized =rescale(frame)
+        cv2.imshow('video resized',frame_resized)
+        
         k = cv2.waitKey(10)
 
         if k%256 == 27:
@@ -49,13 +63,13 @@ def save():
                     
         elif k%256 == 115 or k%256 == 83: 
             # press s or S
-            print (f'Creating img {currentframe}')
-            imgs.append(frame)
-            currentframe += 1
-    cam.release()
+            print(f'creating img {currentframe} ')
+            list_of_images.append(frame)
+            currentframe+=1
+    del cam
+    cv2.destroyAllWindows
+    return list_of_images;
 
-    cv2.destroyAllWindows()
-    return imgs    
 
 if __name__=='__main__':
     save()
