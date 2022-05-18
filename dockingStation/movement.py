@@ -33,7 +33,7 @@ def start_movement():
 
 
     start_time = time.time()
-    seconds = 6
+    seconds = 8
     # move forward
     while True:
         current_time = time.time()
@@ -42,9 +42,9 @@ def start_movement():
         rov.send_control(my_lovely_fake_joy_stick)
 
         if elapsed_time > seconds:
+            print("time elapsed")
             break
     
-    rov.disarm_vehicle()
 
 start_conn()
 start_movement()
