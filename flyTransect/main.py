@@ -4,6 +4,7 @@ from rovlib.cameras import RovCam
 from rovlib.control import RovMavlink, JoyStickControl
 
 THROTTLE = 0.7
+
 rov = RovMavlink(connection_type = 'udpin', connection_ip = '0.0.0.0', connection_port = '14550', silent_mode = True)
 # Binds to the port in the given address
 rov.establish_connection()
@@ -25,55 +26,6 @@ class RedLineFollowing:
         cv2.destroyAllWindows()
         # return int(bounding_box[0] + bounding_box[2] / 2), int(bounding_box[1] + bounding_box[3] / 2)
         return bounding_box
-
-    def checkDirection(self, mask, boundings):
-        x = boundings[0]
-        y = boundings[1]
-        w = boundings[2]
-        h = boundings[3]
-
-        list_down = mask[y + h, x:x + w]
-        list_up = mask[y, x:x + w]
-        list_left = mask[y:y + h, x]
-        list_right = mask[y:y + h, x + w]
-
-        print(f"left: {cv2.countNonZero(list_left)}")
-        print(f"right: {cv2.countNonZero(list_right)}")
-        print(f"up: {cv2.countNonZero(list_up)}")
-        print(f"down: {cv2.countNonZero(list_down)}")
-        print("=====================================================================================")
-
-        if cv2.countNonZero(list_up) > 0 and self.lastDirection[1] != "up":
-            print("Move up")
-            # joyStick = JoyStickControl(z_throttle=0.8)
-            # rov.send_control(joyStick)
-            self.lastDirection[1] = "down"
-            y -= 20
-        if cv2.countNonZero(list_down) > 0 and self.lastDirection[1] != "down":
-            print("Move down")
-            # joyStick = JoyStickControl(z_throttle=-0.8)
-            # rov.send_control(joyStick)
-            self.lastDirection[1] = "up"
-            y += 20
-        if cv2.countNonZero(list_right) > 0 and self.lastDirection[0] != "right":
-            print("Move right")
-            # joyStick = JoyStickControl(y_throttle=0.8)
-            # rov.send_control(joyStick)
-            self.lastDirection[0] = "left"
-            x += 20
-        if cv2.countNonZero(list_left) > 0 and self.lastDirection[0] != "left":
-            print("Move left")
-            # joyStick = JoyStickControl(y_throttle=-0.8)
-            # rov.send_control(joyStick)
-            self.lastDirection[0] = "right"
-            x -= 20
-
-        if cv2.countNonZero(list_left) == 0 and cv2.countNonZero(list_right) == 0:
-            self.lastDirection[0] = None
-        if cv2.countNonZero(list_up) == 0 and cv2.countNonZero(list_down) == 0:
-            self.lastDirection[1] = None
-
-        return (x, y, w, h)
 
 
     def checkMainDirection(self, mask, size):
@@ -167,49 +119,6 @@ class RedLineFollowing:
             x, y, w, h = cv2.boundingRect(red_area)
             cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-
-# video = cv2.VideoCapture("Resources/videos/fish_pen_transect (1080p).mp4")
-# frame = cv2.imread("Resources/images/redLine_canvas")
-# frame = cv2.imread("Resources/images/onlinePaint.png")
-#frame = cv2.resize(frame,[800,800])
-# frame = cv2.imread("Resources/images/circle.jpg")
-
-# _, frame = video.read()
-# frame = cv2.imread("Resources/images/227.jpg")
-# redLineFollowing = RedLineFollowing()
-
-# # frame = cam.read()
-# bounding = redLineFollowing.cameraViewRectangle(frame)
-
-
-# count = 0
-# while 1:
-    
-
-#     # frame = cam.read()
-
-#     cv2.imshow("ROV", frame)
-#     # cv2.imwrite(f"Resources/images/{count}.jpg", frame)
-#     # count = count + 1
-
-  
-#     frame =  cv2.blur(frame, (8,8))
-#     mask = redLineFollowing.redMask(frame)
-#     bounding = redLineFollowing.cameraViewRectangle(frame)
-#     # drawRedLineContoures(frame, mask)
-#     framecpy = frame.copy()
-#     cv2.rectangle(framecpy, (bounding[0], bounding[1]), (bounding[0] + bounding[2], bounding[1] + bounding[3]),
-#                     (255, 0, 0), 3)
-#     redLineFollowing.drawRedLineContoures(framecpy, mask)
-#     cv2.imshow('frame', framecpy)
-#     cv2.imshow('mask', mask)
-#     cv2.waitKey(0)
-#     cv2.destroyAllWindows()
-
-#     bounding = redLineFollowing.checkDirection(mask, bounding)
-# frame = cv2.imread("Resources/images/227.jpg")
-# cam = cv2.VideoCapture(0)
-# frame = cv2.imread("Resources/images/300.jpg")
 
 
 # cam = RovCam(RovCam.FRONT)###Z
