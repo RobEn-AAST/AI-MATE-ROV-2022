@@ -7,7 +7,7 @@ import tkinter as tk
 from functools import partial  
 
 
-vid = RovCam(RovCam.MISC1)
+vid = RovCam(RovCam.FRONT)
 img = None
 valid = False
 while True:
@@ -55,7 +55,7 @@ bg = PhotoImage(file = "mosaicAndMapping/a.png")
 class DrawLine:
     def __init__(self,master):
 
-        self.ref_cm = 50
+        self.ref_cm = 100
         self.ref_pix = 0
 
         self.referencing = True
@@ -63,7 +63,7 @@ class DrawLine:
         self.canvas = Canvas(master, width=1500, height=1500)
         self.canvas.bind("<Button-1>", lambda e: self._move(e.x,e.y))
         img = bg    
-        self.canvas.create_image(100,30, anchor=NW, image=bg) 
+        self.canvas.create_image(50,30, anchor=NW, image=bg) 
         self.previous_pos = None
         self.total_length = 0
         self.t = Label(master, text=f"Total Length: {self.total_length} pixels",font=('Arial',12),pady=5,bg="DeepSkyBlue4",fg="white")
