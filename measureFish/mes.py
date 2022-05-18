@@ -146,7 +146,7 @@ while counter < 3:
                     self.centimeters =  self.total_length * self.ref_cm / self.ref_pix
                     print(self.centimeters)
                     self.t.config(text=f"Total Length: {round(self.centimeters ,2)} cm")
-            self.previous_pos = (new_x, new_y)
+            self.previous_pos = (new_x, new_y)*84
 
             if(self.turn == 2 and self.referencing):
                 file1 = open("length.txt", "r+")
