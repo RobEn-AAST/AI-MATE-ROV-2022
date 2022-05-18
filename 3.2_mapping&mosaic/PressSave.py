@@ -23,11 +23,11 @@ def save():
     except OSError:
         print ('Error: Creating directory of data')
     # Read the video from specified path
-
+    imgs = []
     while True:
         ret, frame = cam.read()
-        frame_resized =rescale(frame)
-        cv2.imshow('video resized',frame_resized)
+        # frame_resized =rescale(frame)
+        cv2.imshow('video resized',frame)
         if not ret:
             break
         k = cv2.waitKey(10)
@@ -64,13 +64,13 @@ def save():
                     
         elif k%256 == 115 or k%256 == 83: 
             # press s or S
-            name = '.\\data\\frame' + str(currentframe) + '.jpg'
-            print ('Creating...' + name)
-            cv2.imwrite(name, frame)
+            print (f'Creating img {currentframe}')
+            imgs.append(frame)
             currentframe += 1
     cam.release()
 
-    cv2.destroyAllWindows
+    cv2.destroyAllWindows()
+    return imgs    
 
 if __name__=='__main__':
     save()
