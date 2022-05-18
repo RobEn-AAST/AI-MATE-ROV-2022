@@ -53,7 +53,7 @@ button4.place(x=400, y= 300)
 button5 = tk.Button(window, text = "Nothing " , fg = "blue", width = 18, height = 8, command = lambda : print('x'))
 button5.place(x=200, y= 480)
 
-button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mapping_mosaic/mapping.py"))
+button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
 button6.place(x=400, y= 480)
 
 
