@@ -38,7 +38,7 @@ if __name__ == '__main__':
         cv2.imshow('image', draw_line_widgetk.show_image())
         key = cv2.waitKey(10)
 
-        # Close program with keyboard 'x'
-        if key%256 == 27:
+        # Close program with keyboard 'esc'
+        if key == 27:
             cv2.destroyAllWindows()
             exit(1)
