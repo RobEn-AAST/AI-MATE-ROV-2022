@@ -1,6 +1,6 @@
 import cv2
 
-def crop_imgs(img,dim = (600,600) ,scale= (0.8,1)):
+def crop_imgs(img,dim = (600,600) ,scale= (0.95,1)):
     
     for j in range(4):
         img[j] = cv2.resize(img[j],dim,interpolation=cv2.INTER_LINEAR)
