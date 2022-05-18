@@ -119,29 +119,29 @@ class RedLineFollowing:
             x, y, w, h = cv2.boundingRect(red_area)
             cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-
-
-# cam = RovCam(RovCam.FRONT)###Z
-cam = cv2.VideoCapture("Resources/videos/test_Trim.mp4")
+# cam = cv2.VideoCapture("Resources/videos/test_Trim.mp4")
 # frame = cv2.imread("Resources/images/marawanTest.jpg")
 
+cam = RovCam(RovCam.FRONT)###Z
 redLineFollowing = RedLineFollowing()     
 
 
 # bounding = redLineFollowing.cameraViewRectangle(frame)
 
 while 1:
-    ret, frame = cam.read() ###Z
+    frame = cam.read() ###Z
+    # ret, frame = cam.read() ###Z
+    framecpy = frame.copy()
     frame = cv2.resize(frame, (780, 540),
                interpolation = cv2.INTER_NEAREST)
     frame = cv2.blur(frame, (8,8))
     mask = redLineFollowing.redMask(frame)
     redLineFollowing.checkMainDirection(mask, frame.shape)
-    framecpy = frame.copy()
+    
     redLineFollowing.drawRedLineContoures(framecpy, mask)
     cv2.imshow('frame', framecpy)
     cv2.imshow('mask', mask)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == 27:
         break
     # cv2.destroyAllWindows()
 
