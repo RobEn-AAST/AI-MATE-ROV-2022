@@ -1,4 +1,5 @@
 import cv2
+from rovlib.cameras import RovCam
 from functools import total_ordering
 from tkinter import *
 from random import randint
@@ -6,13 +7,13 @@ import tkinter as tk
 from functools import partial  
 
 
-vid = cv2.VideoCapture(0)
+vid = RovCam(RovCam.MISC1)
 img = None
 valid = False
 while True:
     if valid:
         break
-    ret, img = vid.read()
+    img = vid.read()
     img_copied = img.copy()
     # print("do u like this frame ? a / x")
     cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
@@ -22,17 +23,17 @@ while True:
         img_copied = img.copy()
         cv2.putText(img = img_copied, text = 'approve : a deny : x', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
         cv2.imshow("q", img_copied)
-        # while True:
-        key_in = cv2.waitKey(0)
-        if key_in == ord('a'):
-            valid = True
-            img = cv2.resize(img, (700,700))
-            cv2.imwrite("a.png",img)
+        while True:
+            if cv2.waitKey(4) == ord('a'):
+                valid = True
+                img = cv2.resize(img, (700,700))
+                cv2.imwrite("mosaicAndMapping/a.png", img)
+                break
+            if cv2.waitKey(4) == ord('x'):
+                break
+        if cv2.waitKey(4) == ord('q'):
+            cv2.destroyAllWindows()
             break
-        if key_in == ord('x'):
-            break
-        if key_in == ord('q'):
-            exit()
 
 
 root = Tk()
@@ -47,7 +48,7 @@ root.title("Geeeks For Geeks")
 root.bind('<Escape>',lambda e: root.destroy())
 
 # Add image file
-bg = PhotoImage(file = "a.png")
+bg = PhotoImage(file = "mosaicAndMapping/a.png")
 
 #root.configure(background='DeepSkyBlue4')
 
@@ -141,5 +142,3 @@ class DrawLine:
 DrawLine(root)
 
 root.mainloop()
-
-

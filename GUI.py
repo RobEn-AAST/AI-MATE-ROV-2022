@@ -47,7 +47,7 @@ label.place(x= 300, y= 50)
 
 
 
-button4 = tk.Button(window, text = "GRID \n TASK" , fg = "blue", width = 18, height = 8)
+button4 = tk.Button(window, text = "Measuring \n WRECK" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/measureWreck.py"))
 button4.place(x=400, y= 300)
 
 button5 = tk.Button(window, text = "Nothing " , fg = "blue", width = 18, height = 8, command = lambda : print('x'))
