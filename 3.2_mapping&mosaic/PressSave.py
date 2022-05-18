@@ -12,7 +12,7 @@ def save():
     while True:
         ret, frame = cam.read()
         # frame_resized =rescale(frame)
-        cv2.imshow('video resized',frame)
+        cv2.imshow('video ',frame)
         if not ret:
             break
         k = cv2.waitKey(10)
