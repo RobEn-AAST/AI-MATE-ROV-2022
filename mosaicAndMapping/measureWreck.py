@@ -7,7 +7,7 @@ import tkinter as tk
 from functools import partial  
 
 
-vid = RovCam(RovCam.MISC1)
+vid = RovCam(RovCam.FRONT)
 img = None
 valid = False
 while True:
