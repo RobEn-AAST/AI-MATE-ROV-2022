@@ -2,7 +2,7 @@ import cv2
 
 class DrawLineWidget(object):
     def __init__(self):
-        self.original_image = cv2.imread(r'C:\Users\anton\OneDrive\Desktop\Github\AI-MATE-ROV-2022\3.2_mapping&mosaic\map.png')
+        self.original_image = cv2.imread(r'.\\3.2_mapping&mosaic\\map.png')
         self.clone = self.original_image.copy()
 
         cv2.namedWindow('image')
