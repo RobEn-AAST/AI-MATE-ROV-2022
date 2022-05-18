@@ -6,6 +6,7 @@ import tkinter as tk
 from functools import partial  
 
 counter = 0
+global_length = 0
 while counter < 3:
     vid = cv2.VideoCapture(0)
     img = None
@@ -20,21 +21,21 @@ while counter < 3:
         cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
 
         cv2.imshow("q", img_copied)
-        if cv2.waitKey(4) == ord('s'):
+        if cv2.waitKey(1) == ord('s'):
             img_copied = img.copy()
             cv2.putText(img = img_copied, text = 'approve : a deny : x', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
             cv2.imshow("q", img_copied)
-            # while True:
-            key_in = cv2.waitKey(0)
-            if key_in == ord('a'):
-                valid = True
-                img = cv2.resize(img, (700,700))
-                cv2.imwrite("a.png",img)
-                break
-            if key_in == ord('x'):
-                break
-            if key_in == ord('q'):
-                exit()
+            while True:
+                if cv2.waitKey(1) == ord('a'):
+                    valid = True
+                    img = cv2.resize(img, (700,700))
+                    cv2.imwrite("b.png", img)
+                    break
+                if cv2.waitKey(1) == ord('x'):
+                    break
+        if cv2.waitKey(1) == ord('q'):
+            cv2.destroyAllWindows()
+            exit()
 
 
     root = Tk()
@@ -49,7 +50,7 @@ while counter < 3:
     root.bind('<Escape>',lambda e: root.destroy())
     
     # Add image file
-    bg = PhotoImage(file = "a.png")
+    bg = PhotoImage(file = "b.png")
     
     #root.configure(background='DeepSkyBlue4')
 
@@ -64,7 +65,7 @@ while counter < 3:
             self.canvas = Canvas(master, width=1500, height=1500)
             self.canvas.bind("<Button-1>", lambda e: self._move(e.x,e.y))
             img = bg    
-            self.canvas.create_image(100,100, anchor=NW, image=bg) 
+            self.canvas.create_image(50,30, anchor=NW, image=bg) 
             self.previous_pos = None
             self.total_length = 0
             self.t = Label(master, text=f"Total Length: {self.total_length} pixels",font=('Arial',12),pady=5,bg="DeepSkyBlue4",fg="white")
@@ -143,7 +144,7 @@ while counter < 3:
     DrawLine(root)
 
     root.mainloop()
-    if cv2.waitKey(4) == ord('q'):
+    if cv2.waitKey(1) == ord('q'):
         cv2.destroyAllWindows()
-        break
+        exit()
 
