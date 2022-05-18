@@ -107,7 +107,6 @@ class RedLineFollowing:
 
 redLineFollowing = RedLineFollowing()
 
-bounding = redLineFollowing.cameraViewRectangle(frame)
 
 cam = RovCam(RovCam.FRONT)
 while 1:
@@ -118,17 +117,17 @@ while 1:
     cv2.imshow("ROV", frame)
 
   
-    frame =  frame.blur(frame, (6,6))
+    frame =  cv2.blur(frame, (8,8))
     mask = redLineFollowing.redMask(frame)
-
+    # bounding = redLineFollowing.cameraViewRectangle(frame)
     # drawRedLineContoures(frame, mask)
     framecpy = frame.copy()
-    cv2.rectangle(framecpy, (bounding[0], bounding[1]), (bounding[0] + bounding[2], bounding[1] + bounding[3]),
-                    (255, 0, 0), 3)
+    # cv2.rectangle(framecpy, (bounding[0], bounding[1]), (bounding[0] + bounding[2], bounding[1] + bounding[3]),
+                    # (255, 0, 0), 3)
     redLineFollowing.drawRedLineContoures(framecpy, mask)
-    cv2.imshow('frame', framecpy)
+    # cv2.imshow('frame', framecpy)
     cv2.imshow('mask', mask)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cv2.waitKey(1)
+    # cv2.destroyAllWindows()
 
-    bounding = redLineFollowing.checkDirection(mask, bounding)
+    # bounding = redLineFollowing.checkDirection(mask, bounding)
