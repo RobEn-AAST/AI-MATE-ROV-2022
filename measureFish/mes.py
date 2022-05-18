@@ -6,7 +6,11 @@ import tkinter as tk
 from functools import partial  
 
 counter = 0
-global_length = 0
+
+f = open("length.txt", "w")
+f.write("0")
+f.close()
+
 while counter < 3:
     vid = cv2.VideoCapture(0)
     img = None
@@ -21,21 +25,21 @@ while counter < 3:
         cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
 
         cv2.imshow("q", img_copied)
-        if cv2.waitKey(1) == ord('s'):
+        if cv2.waitKey(4) == ord('s'):
             img_copied = img.copy()
             cv2.putText(img = img_copied, text = 'approve : a deny : x', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
             cv2.imshow("q", img_copied)
-            while True:
-                if cv2.waitKey(1) == ord('a'):
-                    valid = True
-                    img = cv2.resize(img, (700,700))
-                    cv2.imwrite("b.png", img)
-                    break
-                if cv2.waitKey(1) == ord('x'):
-                    break
-        if cv2.waitKey(1) == ord('q'):
-            cv2.destroyAllWindows()
-            exit()
+            # while True:
+            key_in = cv2.waitKey(0)
+            if key_in == ord('a'):
+                valid = True
+                img = cv2.resize(img, (700,700))
+                cv2.imwrite("a.png",img)
+                break
+            if key_in == ord('x'):
+                break
+            if key_in == ord('q'):
+                exit()
 
 
     root = Tk()
@@ -50,7 +54,7 @@ while counter < 3:
     root.bind('<Escape>',lambda e: root.destroy())
     
     # Add image file
-    bg = PhotoImage(file = "b.png")
+    bg = PhotoImage(file = "a.png")
     
     #root.configure(background='DeepSkyBlue4')
 
@@ -114,6 +118,7 @@ while counter < 3:
     
 
         def _move(self,new_x,new_y):
+            new_length = 0
             if(self.turn == 2):
                 self.turn = 0
                 self.previous_pos = None
@@ -127,15 +132,27 @@ while counter < 3:
             if self.previous_pos:
                 old_x, old_y = self.previous_pos
                 self.canvas.create_line(old_x, old_y, new_x, new_y, width=2)
-                self.total_length += ((new_x - old_x) ** 2 + (new_y - old_y) ** 2) ** (1 / 2) 
+                new_length = ((new_x - old_x) ** 2 + (new_y - old_y) ** 2) ** (1 / 2) 
                 if (not self.referencing):
+                    file1 = open("length.txt", "r+")
+                    length_file = float(file1.read())
+                    file1.close()
+                    self.total_length = length_file + new_length
+
+                    f = open("length.txt", "w")
+                    f.write(str(self.total_length))
+                    f.close()
+
                     self.centimeters =  self.total_length * self.ref_cm / self.ref_pix
+                    print(self.centimeters)
                     self.t.config(text=f"Total Length: {round(self.centimeters ,2)} cm")
             self.previous_pos = (new_x, new_y)
 
             if(self.turn == 2 and self.referencing):
-                self.ref_pix = self.total_length
-                self.total_length = 0
+                file1 = open("length.txt", "r+")
+                length_file = float(file1.read())
+                self.ref_pix = new_length
+                self.total_length = length_file
                 self.referencing = False
 
 
@@ -144,7 +161,11 @@ while counter < 3:
     DrawLine(root)
 
     root.mainloop()
-    if cv2.waitKey(1) == ord('q'):
+    if cv2.waitKey(4) == ord('q'):
         cv2.destroyAllWindows()
-        exit()
+        break
 
+
+
+
+          
