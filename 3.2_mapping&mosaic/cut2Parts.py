@@ -1,21 +1,25 @@
 import cv2
-
-def split_img():
-    count=1
-    for i in range(1,5,1):
-        IMg_path='.\\data\\frame'+str(i)+'.jpg'
-        img = cv2.imread(IMg_path)
-        if img is not None:
-            h= img.shape[0]
+def split_img(img):
+    list=[]
+    for i in (img):
+        im = i
+        if im is not None:
+            h= im.shape[0]
             half = h//2
-            top = img[:half, :]
-            bottom = img[half:, :]
+            top = im[:half, :]
+            bottom = im[half:, :]
+            list.append(top)
+            list.append(bottom)
+    datasave(list)
+    return list
+def datasave(imgs):
+    count=1
+    for i in (imgs):
+        im = i
+        if im is not None:
             filename = '.\\data\\split'+str(count)+'.jpg'
-            cv2.imwrite(filename,top)
+            cv2.imwrite(filename, im)
             count += 1
-            filename = '.\\data\\split'+str(count)+'.jpg'
-            cv2.imwrite(filename, bottom)
-            count += 1
-
+            
 if __name__=='__main__':
     split_img()
