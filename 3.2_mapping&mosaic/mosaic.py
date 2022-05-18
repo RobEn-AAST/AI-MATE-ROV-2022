@@ -1,7 +1,6 @@
 import cv2
 from screeninfo import get_monitors
-
-def mosaic():
+def mosaic(imgs):
     window_name= "fullscreen"
 
     # width and height of the window
@@ -13,16 +12,14 @@ def mosaic():
     cv2.namedWindow(window_name,cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-    # read images
-
-    img_1=cv2.resize((cv2.imread('.\\data\\split1.jpg')),(width//4,height//2))
-    img_2=cv2.resize((cv2.imread('.\\data\\split2.jpg')),(width//4,height//2))
-    img_3=cv2.resize((cv2.imread('.\\data\\split3.jpg')),(width//4,height//2))
-    img_4=cv2.resize((cv2.imread('.\\data\\split4.jpg')),(width//4,height//2))
-    img_5=cv2.resize((cv2.imread('.\\data\\split5.jpg')),(width//4,height//2))
-    img_6=cv2.resize((cv2.imread('.\\data\\split6.jpg')),(width//4,height//2))
-    img_7=cv2.resize((cv2.imread('.\\data\\split7.jpg')),(width//4,height//2))
-    img_8=cv2.resize((cv2.imread('.\\data\\split8.jpg')),(width//4,height//2))
+    img_1=cv2.resize(imgs[0],(width//4,height//2))
+    img_2=cv2.resize(imgs[1],(width//4,height//2))
+    img_3=cv2.resize(imgs[2],(width//4,height//2))
+    img_4=cv2.resize(imgs[3],(width//4,height//2))
+    img_5=cv2.resize(imgs[4],(width//4,height//2))
+    img_6=cv2.resize(imgs[5],(width//4,height//2))
+    img_7=cv2.resize(imgs[6],(width//4,height//2))
+    img_8=cv2.resize(imgs[7],(width//4,height//2))
 
     #final shape review
     img_review= final_shape([[img_1,img_3,img_5,img_7],[img_2,img_4,img_6,img_8]])
@@ -34,6 +31,6 @@ def mosaic():
 # gathering images
 def final_shape(list_2d):
     return cv2.vconcat([cv2.hconcat(list_1) for list_1 in list_2d])
-
+  
 if __name__=='__main__':
     mosaic()
