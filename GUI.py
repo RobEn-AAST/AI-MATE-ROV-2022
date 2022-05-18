@@ -19,7 +19,7 @@ def start_script_thread(script_name):
 
 
 window = tk.Tk()
-window.geometry('700x700')
+window.geometry('700x900')
 window.title("run rov")
 
    # the button for transect line mission 
@@ -55,6 +55,12 @@ button5.place(x=200, y= 480)
 
 button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
 button6.place(x=400, y= 480)
+
+button7 = tk.Button(window, text = "Nothing" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
+button7.place(x=200, y= 660)
+
+button8 = tk.Button(window, text = "Nothing" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
+button8.place(x=400, y= 660)
 
 
 window.mainloop()
