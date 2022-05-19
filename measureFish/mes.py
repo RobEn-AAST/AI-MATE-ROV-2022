@@ -26,7 +26,7 @@ f.write("")
 f.close()
 glob_centimeters = 0
 while True:
-    # vid = cv2.VideoCapture(0
+    # vid = cv2.VideoCapture(0)
     vid = RovCam(RovCam.FRONT)
     img = None
     valid = False
@@ -35,6 +35,7 @@ while True:
         if valid:
             break
         img = vid.read()
+        # _, img = vid.read()
         img_copied = img.copy()
         # print("do u like this frame ? a / x")
         cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
@@ -127,7 +128,7 @@ while True:
             e3t = self.e3.get()
             e4t = self.e4.get()
             print(e1t, e2t, e3t, e4t)
-            result = int(e3t)*int(e1t)*int(e4t)**int(e2t)
+            result = float(e3t)*float(e1t)*(float(e4t)**float(e2t))
             print(result)
             self.my_string_var.set("result = " + str(result))   
     
@@ -172,4 +173,3 @@ while True:
     if cv2.waitKey(4) == 27:
         cv2.destroyAllWindows()
         break
-

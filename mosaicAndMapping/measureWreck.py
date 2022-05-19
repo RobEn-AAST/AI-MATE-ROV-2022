@@ -4,34 +4,38 @@ from functools import total_ordering
 from tkinter import *
 from random import randint
 import tkinter as tk  
-from functools import partial  
+from functools import partial
+
+from cv2 import VideoCapture  
 
 
 vid = RovCam(RovCam.FRONT)
+# vid = VideoCapture(0)
 img = None
 valid = False
 while True:
     if valid:
         break
     img = vid.read()
+    # _, img = vid.read()
     img_copied = img.copy()
     # print("do u like this frame ? a / x")
     cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
 
     cv2.imshow("q", img_copied)
-    if cv2.waitKey(0) == ord('s'):
+    if cv2.waitKey(1) == ord('s'):
         img_copied = img.copy()
         cv2.putText(img = img_copied, text = 'approve : a deny : x', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
         cv2.imshow("q", img_copied)
         while True:
-            if cv2.waitKey(0) == ord('a'):
+            if cv2.waitKey(1) == ord('a'):
                 valid = True
                 img = cv2.resize(img, (700,700))
                 cv2.imwrite("mosaicAndMapping/a.png", img)
                 break
-            if cv2.waitKey(0) == ord('x'):
+            if cv2.waitKey(1) == ord('x'):
                 break
-        if cv2.waitKey(0) == ord('q'):
+        if cv2.waitKey(1) == ord('q'):
             cv2.destroyAllWindows()
             break
 
@@ -44,7 +48,7 @@ width= root.winfo_screenwidth()
 height= root.winfo_screenheight()
 #setting tkinter window size
 root.geometry("%dx%d" % (width, height))
-root.title("Geeeks For Geeks")
+root.title("Measure Wreck")
 root.bind('<Escape>',lambda e: root.destroy())
 
 # Add image file
@@ -106,7 +110,7 @@ class DrawLine:
         e3t = self.e3.get()
         e4t = self.e4.get()
         print(e1t, e2t, e3t, e4t)
-        result = int(e3t)*int(e1t)*int(e4t)**int(e2t)
+        result = float(e3t)*float(e1t)*(float(e4t)**float(e2t))
         print(result)
         self.my_string_var.set("result = " + str(result))   
 
