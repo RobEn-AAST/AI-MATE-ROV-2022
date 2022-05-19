@@ -4,11 +4,8 @@ import threading
 import os
 
 # from grid import start_drawing 
-
-cam = "0" # camera 0
-
 def script_exec(script_name):
-    os.system("python ./"+script_name) 
+    os.system("python ./"+script_name)
 
 
 def start_script_thread(script_name):
@@ -43,12 +40,12 @@ button4 = tk.Button(window, text = "Measuring \n WRECK" , fg = "blue", width = 1
 button4.place(x=700, y= 120)
 
 
-button5 = tk.Button(window, text = "Nothing " , fg = "blue", width = 18, height = 8, command = lambda : print('x'))
-button5.place(x=100, y= 320)
+# button5 = tk.Button(window, text = "Nothing " , fg = "blue", width = 18, height = 8, command = lambda : print('x'))
+# button5.place(x=100, y= 320)
 
 
-button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
-button6.place(x=300, y= 320)
+# button6 = tk.Button(window, text = "Mapping" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/mapping.py"))
+# button6.place(x=300, y= 320)
 
 
 button7 = tk.Button(window, text = "Float" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("MeasureInFloatV_H/main.py"))
@@ -56,7 +53,7 @@ button7.place(x=500, y= 320)
 
 
 button8 = tk.Button(window, text = "Mosaic" , fg = "blue", width = 18, height = 8, command = lambda :start_script_thread("mosaicAndMapping/main.py"))
-button8.place(x=700, y= 320)
+button8.place(x=300, y= 320)
 
 
 window.mainloop()
