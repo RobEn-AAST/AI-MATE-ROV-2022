@@ -1,11 +1,12 @@
 import imp
 from mosaic import mosaic
-from PressSave import save
+# from PressSave import save
 from crop import crop_imgs
 from cut2Parts import split_img
 from time import sleep
 from random8 import Display8imgs
 from mapping import DrawLineWidget
+from rotate import torotate
 import cv2
 
 def mapping():
@@ -21,8 +22,10 @@ def mapping():
 
 
 if __name__=='__main__':
-    imgs_list = save()
+    # imgs_list = save()
+    imgs_list = [cv2.imread(r'D:\RobEn\python\ctd-main\AI-MATE-ROV-2022\mosaicAndMapping\1.jpeg'), cv2.imread(r'D:\RobEn\python\ctd-main\AI-MATE-ROV-2022\mosaicAndMapping\2.jpeg'), cv2.imread(r'D:\RobEn\python\ctd-main\AI-MATE-ROV-2022\mosaicAndMapping\3.jpeg'), cv2.imread(r'D:\RobEn\python\ctd-main\AI-MATE-ROV-2022\mosaicAndMapping\4.jpeg')]
     imgs_cropped_list = crop_imgs(imgs_list)
+    rotated = torotate (imgs_cropped_list)
     img8_list = split_img(imgs_cropped_list)
     sleep(1)
     mapping()
