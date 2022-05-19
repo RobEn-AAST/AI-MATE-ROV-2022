@@ -3,23 +3,37 @@ from functools import total_ordering
 from tkinter import *
 from random import randint
 import tkinter as tk  
-from functools import partial  
+from functools import partial
+from rovlib.cameras import RovCam
+import os
+
+
+
+
+def destroy():
+    global glob_centimeters
+    f = open("length.txt", "a")
+    f.write(str(glob_centimeters)+os.linesep)
+    glob_centimeters = 0
+    f.close()
+    root.destroy()
+
 
 counter = 0
 
 f = open("length.txt", "w")
-f.write("0")
+f.write("")
 f.close()
-
-while counter < 3:
-    vid = cv2.VideoCapture(0)
+glob_centimeters = 0
+while True:
+    vid = RovCam(RovCam.FRONT)
     img = None
     valid = False
     counter+=1
     while True:
         if valid:
             break
-        ret, img = vid.read()
+        img = vid.read()
         img_copied = img.copy()
         # print("do u like this frame ? a / x")
         cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
@@ -37,8 +51,8 @@ while counter < 3:
                 cv2.imwrite("a.png",img)
                 break
             if key_in == ord('x'):
-                break
-            if key_in == ord('q'):
+                continue
+            if key_in == 27:
                 exit()
 
 
@@ -51,7 +65,7 @@ while counter < 3:
     #setting tkinter window size
     root.geometry("%dx%d" % (width, height))
     root.title("Geeeks For Geeks")
-    root.bind('<Escape>',lambda e: root.destroy())
+    root.bind('<Escape>',lambda e: destroy())
     
     # Add image file
     bg = PhotoImage(file = "a.png")
@@ -118,6 +132,7 @@ while counter < 3:
     
 
         def _move(self,new_x,new_y):
+            global glob_centimeters
             new_length = 0
             if(self.turn == 2):
                 self.turn = 0
@@ -134,25 +149,17 @@ while counter < 3:
                 self.canvas.create_line(old_x, old_y, new_x, new_y, width=2)
                 new_length = ((new_x - old_x) ** 2 + (new_y - old_y) ** 2) ** (1 / 2) 
                 if (not self.referencing):
-                    file1 = open("length.txt", "r+")
-                    length_file = float(file1.read())
-                    file1.close()
-                    self.total_length = length_file + new_length
-
-                    f = open("length.txt", "w")
-                    f.write(str(self.total_length))
-                    f.close()
+                    self.total_length += new_length
 
                     self.centimeters =  self.total_length * self.ref_cm / self.ref_pix
                     print(self.centimeters)
+                    glob_centimeters += self.centimeters
                     self.t.config(text=f"Total Length: {round(self.centimeters ,2)} cm")
             self.previous_pos = (new_x, new_y)
 
             if(self.turn == 2 and self.referencing):
-                file1 = open("length.txt", "r+")
-                length_file = float(file1.read())
                 self.ref_pix = new_length
-                self.total_length = length_file
+                self.total_length = 0
                 self.referencing = False
 
 
@@ -161,11 +168,7 @@ while counter < 3:
     DrawLine(root)
 
     root.mainloop()
-    if cv2.waitKey(4) == ord('q'):
+    if cv2.waitKey(4) == 27:
         cv2.destroyAllWindows()
         break
 
-
-
-
-          

@@ -19,19 +19,19 @@ while True:
     cv2.putText(img = img_copied, text = 'click s to take snapshot', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
 
     cv2.imshow("q", img_copied)
-    if cv2.waitKey(4) == ord('s'):
+    if cv2.waitKey(0) == ord('s'):
         img_copied = img.copy()
         cv2.putText(img = img_copied, text = 'approve : a deny : x', org=(15,30), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.2, color=(255,0,0), thickness=3)
         cv2.imshow("q", img_copied)
         while True:
-            if cv2.waitKey(4) == ord('a'):
+            if cv2.waitKey(0) == ord('a'):
                 valid = True
                 img = cv2.resize(img, (700,700))
                 cv2.imwrite("mosaicAndMapping/a.png", img)
                 break
-            if cv2.waitKey(4) == ord('x'):
+            if cv2.waitKey(0) == ord('x'):
                 break
-        if cv2.waitKey(4) == ord('q'):
+        if cv2.waitKey(0) == ord('q'):
             cv2.destroyAllWindows()
             break
 
