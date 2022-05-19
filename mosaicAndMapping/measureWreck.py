@@ -55,7 +55,7 @@ bg = PhotoImage(file = "mosaicAndMapping/a.png")
 class DrawLine:
     def __init__(self,master):
 
-        self.ref_cm = 100
+        self.ref_cm = 75
         self.ref_pix = 0
 
         self.referencing = True

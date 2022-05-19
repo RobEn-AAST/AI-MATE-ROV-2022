@@ -26,6 +26,7 @@ f.write("")
 f.close()
 glob_centimeters = 0
 while True:
+    # vid = cv2.VideoCapture(0
     vid = RovCam(RovCam.FRONT)
     img = None
     valid = False
