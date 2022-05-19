@@ -48,11 +48,11 @@ class RedLineFollowing:
         print(f"down: {cv2.countNonZero(list_down)}")
         print("=====================================================================================")
 
-        if cv2.countNonZero(list_up) > minimumPixels and self.lastDirection[1] != "up":
-            print("Move up")
-            joyStick = JoyStickControl(z_throttle=THROTTLE)
-            rov.send_control(joyStick)
-            self.lastDirection[1] = "down"
+        # if cv2.countNonZero(list_up) > minimumPixels and self.lastDirection[1] != "up":
+        #     print("Move up")
+        #     joyStick = JoyStickControl(z_throttle=THROTTLE)
+        #     rov.send_control(joyStick)
+        #     self.lastDirection[1] = "down"
             # y -= 20
         if cv2.countNonZero(list_down) > minimumPixels and self.lastDirection[1] != "down":
             print("Move down")
@@ -85,29 +85,29 @@ class RedLineFollowing:
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         #########general range############
-        # range_low1 = np.array([0, 50, 50])
-        # range_high1 = np.array([10, 255, 255])
-        # range_low2 = np.array([170, 50, 50])
-        # range_high2 = np.array([180, 255, 255])
-
-        # mask1 = cv2.inRange(hsv_image, range_low1, range_high1)
-        # mask2 = cv2.inRange(hsv_image, range_low2, range_high2)
-
-        # # Return the result of two merged masks
-        # return cv2.add(mask2, mask1)
-
-
-        #########Specific range############
-        range_low1 = np.array([0, 100, 20])
-        range_high1 = np.array([0, 255, 255])
-        range_low2 = np.array([160, 100, 20])
-        range_high2 = np.array([190, 255, 255])
+        range_low1 = np.array([0, 50, 50])
+        range_high1 = np.array([10, 255, 255])
+        range_low2 = np.array([170, 50, 50])
+        range_high2 = np.array([180, 255, 255])
 
         mask1 = cv2.inRange(hsv_image, range_low1, range_high1)
         mask2 = cv2.inRange(hsv_image, range_low2, range_high2)
 
         # Return the result of two merged masks
         return cv2.add(mask2, mask1)
+
+
+        #########Specific range############
+        # range_low1 = np.array([0, 100, 20])
+        # range_high1 = np.array([0, 255, 255])
+        # range_low2 = np.array([160, 100, 20])
+        # range_high2 = np.array([190, 255, 255])
+
+        # mask1 = cv2.inRange(hsv_image, range_low1, range_high1)
+        # mask2 = cv2.inRange(hsv_image, range_low2, range_high2)
+
+        # # Return the result of two merged masks
+        # return cv2.add(mask2, mask1)
 
     # TODO test
     def drawRedLineContoures(self, image, mask):
