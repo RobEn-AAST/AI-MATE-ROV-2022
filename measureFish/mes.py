@@ -128,7 +128,8 @@ while True:
             e3t = self.e3.get()
             e4t = self.e4.get()
             print(e1t, e2t, e3t, e4t)
-            result = float(e3t)*float(e1t)*(float(e4t)**float(e2t))
+            result = float(e3t)*float(e1t)*(float(e4t)**float(e2t))*10**-3
+            result= "{:.2f}".format(result)
             print(result)
             self.my_string_var.set("result = " + str(result))   
     
