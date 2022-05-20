@@ -1,50 +1,11 @@
 from rovlib.control import RovMavlink, JoyStickControl
-import time
+from time import sleep
 
-
-
-rov = RovMavlink(connection_type = 'udpin', connection_ip = '0.0.0.0', connection_port = '14550', silent_mode = True)
-def start_conn():
-    rov.establish_connection()
-
-
-def start_movement():
-    rov.arm_vehicle() # you only need to arm the vehicle once, there is no need to arm it every time you want to stablize it
-   
-
-    rov.set_vehicle_mode(rov.Mode.ALT_HOLD)
-    # to disarm vehicle
-    my_lovely_fake_joy_stick = JoyStickControl(z_throttle=-0.6)
-    
-    # get down a bit
-    start_time = time.time()
-    seconds = 2
-    while True:
-        current_time = time.time()
-        elapsed_time = current_time - start_time
-    
-        rov.send_control(my_lovely_fake_joy_stick)
-
-        if elapsed_time > seconds:
-            break
-
-
-    my_lovely_fake_joy_stick = JoyStickControl(x_throttle=0.5)
-
-
-    start_time = time.time()
-    seconds = 8
-    # move forward
-    while True:
-        current_time = time.time()
-        elapsed_time = current_time - start_time
-    
-        rov.send_control(my_lovely_fake_joy_stick)
-
-        if elapsed_time > seconds:
-            print("time elapsed")
-            break
-    
-
-start_conn()
-start_movement()
+rov = RovMavlink(connection_type = 'udpin', connection_ip = '0.0.0.0', connection_port = '14555', silent_mode = True)
+rov.establish_connection()
+my_lovely_fake_joy_stick = JoyStickControl(x_throttle=1)
+# move forward
+for i in range(800):
+    print(i)
+    rov.send_control(my_lovely_fake_joy_stick)
+    sleep(0.01)
